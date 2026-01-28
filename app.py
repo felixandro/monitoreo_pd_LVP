@@ -22,7 +22,7 @@ st.set_page_config(
 
 if "databse" not in st.session_state:
     st.session_state["database"] = cargar_bbdd("pd_lvp_verano")
-    st.session_state["database"].to_csv("data/data.csv", index=False, sep = ";", encoding="utf-8")
+    #st.session_state["database"].to_csv("data/data.csv", index=False, sep = ";", encoding="utf-8")
 
 
 #--------------------------------------------------
