@@ -1,11 +1,6 @@
 import streamlit as st
-
 from src.database import cargar_bbdd
-import src.statistics as stats
-
-from ui.encuestas_x_pc import success_sampling_rate_screen
-from ui.responses_time import responses_time_screen
-from ui.surveyor_location import surveyor_location_screen
+import ui.config_inicio as ci
 
 # --------------------------------------------------
 # Configuración general de la app
@@ -20,36 +15,32 @@ st.set_page_config(
 # Variables de Estado
 # --------------------------------------------------
 
-if "databse" not in st.session_state:
+if "database" not in st.session_state:
     st.session_state["database"] = cargar_bbdd("pd_lvp_verano")
-    #st.session_state["database"].to_csv("data/data.csv", index=False, sep = ";", encoding="utf-8")
 
+if "database_filtered" not in st.session_state:
+    st.session_state["database_filtered"] = st.session_state["database"].copy()
+
+if "t_pd_min" not in st.session_state:
+    st.session_state["tpd_min"] = 0
 
 #--------------------------------------------------
-# Pantallas
+# Pantalla de Configuración
 #--------------------------------------------------
 
 st.title("Monitoreo PD Tren LVP")
 
-#--------------------------------------------------
-# Encuestas por Punto de Control
-#--------------------------------------------------
+ci.generate_date_inputs()
 
-#surveys_by_pc_screen()
+ci.validation_times_ui()
 
-st.header("Cantidad de Encuestas")
-
-success_sampling_rate_screen("pc", "Lugar")
-
-success_sampling_rate_screen("id_encuestador", "Encuestador")
-
-
-responses_time_screen()
-
-surveyor_location_screen()
+ci.filter_button()
 
 st.divider()
 
+st.write("## Base de Datos Completa")
 st.write(st.session_state["database"])
 
+st.write("## Base de Datos Filtrada")
+st.write(st.session_state["database_filtered"])
 

@@ -21,7 +21,7 @@ def generate_gdf_surveyor_locations(df):
 
 def deploy_map():
 
-    df = st.session_state["database"]
+    df = st.session_state["database_filtered"]
 
     gdf = generate_gdf_surveyor_locations(df)
 
