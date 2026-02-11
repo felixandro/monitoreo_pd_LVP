@@ -67,6 +67,8 @@ if n_levels_tv > 1 and n_levels_ta > 1:
                                                             "delta_tv", 
                                                             "delta_ta")
     
+    st.pyplot(grafico_dispersion_tv_ta)
+    
 if n_levels_tv > 1 and n_levels_f > 1:
 
     st.write(f"### T.Viaje vs Frecuencia")

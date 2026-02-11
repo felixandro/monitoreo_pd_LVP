@@ -36,6 +36,7 @@ def filter_button():
         agregar_val_col()
         agregar_val2_col()
         format_valid_database()
+        biogeme_format_database()
         st.success("Datos filtrados correctamente.")
 
 def validation_times_ui():
@@ -66,3 +67,10 @@ def format_valid_database():
     df_valid = df[df["VAL2"] == 1].copy()
     format_df = format_database(df_valid)
     st.session_state["formatted_database"] = format_df
+
+def biogeme_format_database():
+    df = st.session_state["formatted_database"].copy()
+    biogeme_df = df[["tv1","c1","ta1","f1",
+                     "tv2","c2","ta2","f2",]]
+    st.session_state["biogeme_database"] = biogeme_df
+
